@@ -8,12 +8,17 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var infoLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
-
+    
+    @IBAction func SecondPageButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "goToSecondPage", sender: self)
+    }
+    
 }
 
