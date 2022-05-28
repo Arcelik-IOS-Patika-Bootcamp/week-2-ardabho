@@ -7,27 +7,29 @@
 
 import UIKit
 
+protocol MyDataSendingDelegateProtocol {
+    func sendDataToFirstViewController(myData: String)
+}
+
 class SecondViewController: UIViewController {
-    @IBOutlet weak var infoLabel: UILabel!
+    
+    @IBOutlet weak var dataToSendBackTextField: UITextField!
+    
+    var delegate: MyDataSendingDelegateProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func FirstPageButtonPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: "goToFirstPage", sender: self)
+    @IBAction func sendDataButtonClicked(_ sender: UIButton) {
+        if delegate != nil && dataToSendBackTextField.text != nil {
+            let dataToBeSent = dataToSendBackTextField.text
+            delegate?.sendDataToFirstViewController(myData: dataToBeSent!)
+            dismiss(animated: true)
+        }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
