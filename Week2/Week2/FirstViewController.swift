@@ -21,14 +21,21 @@ class FirstViewController: UIViewController {
 
 extension FirstViewController: MyDataSendingDelegateProtocol {
     
+    /// Sets the text sent from second view controller to the labels text
+    /// - Parameter myData: A string
     func sendDataToFirstViewController(myData: String) {
-        self.receivedDataLabel.text = myData
+        if myData != "" {
+            self.receivedDataLabel.text = myData
+        } else {
+            self.receivedDataLabel.text = "No Data Sent"
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToSecondVC"{
             let destinationVC: SecondViewController = segue.destination as! SecondViewController
-            destinationVC.delegate = self
+            destinationVC.delegate = self //set delegate as self
+            destinationVC.dataSentFromFirstVC = "Ninja Turtles" //send data to second view controller
         }
     }
     
